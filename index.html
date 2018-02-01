@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>TimeLine</title>
+</head>
+<body>
+    <div id="Timelinecontainer" width="100%" height="200px">
+        <canvas id="Timelinecanvas" height="200"></canvas>
+    </div>
+
+    <script src="JS/jquery-1.10.2.min.js"></script>
+
+    <script src="Timeline.js"></script>
+    <script type="text/javascript">
+        var el = document.getElementById('Timelinecanvas');
+
+        var TL = new TimeLine(el);
+
+        TL.marginscale = 1;
+
+        el.addEventListener('DATECLICKED', function (e) { alert("DateClicked " + TL.hoverdate + "\n ON Line " + TL.LineLabels[TL.LINEOVER]); }, true);
+
+        el.addEventListener('DATEHOVERED', function (e) { HandleDateHoveredEvent(e); }, true);
+
+        function HandleDateHoveredEvent(e)
+        {
+            document.getElementById('TheHoverDate').value = TL.DATEHOVEREDINFO.DATECLICKED.toDateString("yyyy-MM-dd");
+        }
+
+        TL.FillCanvas();
+
+    </script>
+
+
+    <input type="button" onclick="TL.numrows=3; TL.FillCanvas();" id="btn1" value="3 Rows">
+    <input type="button" onclick="TL.numrows=4; TL.FillCanvas();" id="btn2" value="4 Rows">
+    <input type="button" onclick="TL.numrows=5; TL.FillCanvas();" id="btn3" value="5 Rows">
+
+    <input type="button" onclick="TL.daysize++; TL.FillCanvas();" id="btn4" value="Daysize UP">
+    <input type="button" onclick="TL.daysize--; TL.FillCanvas();" id="btn5" value="Daysize Down">
+
+    <input type="button" onclick="TL.startdate = TL.addDays(TL.startdate,1); TL.FillCanvas();" id="btn6" value="UP 1 Day">
+    <input type="button" onclick="TL.startdate = TL.addDays(TL.startdate,-1); TL.FillCanvas();" id="btn7" value="DOWN 1 Day">
+
+
+    <input type="button" onclick="TL.TestRender = !TL.TestRender; TL.FillCanvas();" id="btn8" value="Toggle Test Render">
+
+    <input type="button" 
+           onclick="TL.LineLabels[0] = 'This Was Line 1';
+    TL.LineLabels[1] = 'This Was Line 2';
+    TL.LineLabels[2] = 'This Was Line 3';
+    TL.LineLabels[3] = 'This Was Line 4';
+    TL.LineLabels[4] = 'This Was Line 5';
+    TL.FillCanvas();" id="btn9" value="Change Lables">
+
+    <input type="button"
+           onclick="TL.ClearAllDataItems();
+    TL.AddDataItem(new TimeLineDataItem(1, Chicklet_Styles.Chicklet_BlueTriangle, new Date('4/1/2016'), new Date('4/30/2016'), 'THIS IS METADATA'));
+    TL.AddDataItem(new TimeLineDataItem(1, Chicklet_Styles.Chicklet_BlueTriangle, new Date('4/7/2016'), new Date('4/21/2016'), 'THIS IS METADATA_Second'));
+    TL.AddDataItem(new TimeLineDataItem(2, Chicklet_Styles.Chicklet_GoldTriangle, new Date('4/1/2016'), new Date('4/30/2016'), 'THIS IS METADATA1'));
+    TL.AddDataItem(new TimeLineDataItem(3, Chicklet_Styles.Chicklet_OrangeCircle, new Date('4/1/2016'), new Date('4/30/2016'), 'THIS IS METADATA2'));
+    TL.AddDataItem(new TimeLineDataItem(4, Chicklet_Styles.Chicklet_PurpleTriangle, new Date('4/1/2016'), new Date('4/30/2016'), 'THIS IS METADATA3'));
+    TL.AddDataItem(new TimeLineDataItem(5, Chicklet_Styles.Chicklet_GreenCircle, new Date('4/1/2016'), new Date('4/30/2016'), 'THIS IS METADATA4'));
+    TL.AddDataItem(new TimeLineDataItem(3, Chicklet_Styles.Chicklet_WhiteBox, new Date('12/1/2015'), new Date('12/31/2015'), 'OLD METADATA'));
+    TL.FillCanvas();" id="btn10" value="Sample Data">
+
+    <input type="text" id="TheHoverDate" />
+
+    <input type="button" onclick="document.write(TL.GetImage());" id="btnimag" value="Picture">
+
+
+</body>
+</html>
