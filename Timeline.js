@@ -118,7 +118,7 @@ var TimeLine = /** @class */ (function () {
             var xDiff = _this.xDown - xUp;
             var yDiff = _this.yDown - yUp;
             var delta = 0;
-            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (Math.abs(xDiff) > Math.abs(yDiff)) { /*most significant*/
                 if (xDiff > 0) {
                     /* left swipe */
                     delta = 1;
@@ -227,7 +227,7 @@ var TimeLine = /** @class */ (function () {
             for (var cline = 0; cline < this.numrows; cline++) {
                 var y = (this.margin * this.marginscale) + ((innerregionheight / this.numrows) * cline);
                 // Lable The StartDate
-                if (cday == 0 && cline == 0) {
+                if (cday == 0 && cline == 0) { // we need to display the startdate here
                     var hov = (this.startdate.getMonth() + 1) + "/" + this.startdate.getDate() + "/" + this.startdate.getFullYear();
                     ctx.font = "10px Courier";
                     var wid = (ctx.measureText(hov).width - this.daysize) / 2;
@@ -1087,4 +1087,3 @@ var InterpretedLineDataItem = /** @class */ (function () {
     }
     return InterpretedLineDataItem;
 }());
-//# sourceMappingURL=Timeline.js.map
