@@ -343,10 +343,10 @@ Requires HTML5 Canvas support.
 ### Compiling TypeScript
 
 ```bash
-tsc Timeline.ts
+tsc --target ES5 --sourceMap Timeline.ts
 ```
 
-This generates `Timeline.js` and `Timeline.js.map`.
+This generates `Timeline.js` (ES5 output) and `Timeline.js.map`.
 
 ### Project Structure
 
